@@ -6,8 +6,7 @@ import Todo from './Todo';
 import {useIsFocused} from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { log } from 'react-native-reanimated';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+
 
 
 const Home = ({navigation}) => {

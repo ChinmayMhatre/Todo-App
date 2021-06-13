@@ -9,23 +9,18 @@ import {Item,
         Input,
         Button
     } from 'native-base'
-
-import shortid from "shortid"    
-
-
-
- 
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Edit = ({navigation,route}) => {
     const [title, setTitle] = useState("")
     const [error,setError]  = useState("")
+    const [id, setId] = useState('')
 
     useEffect(() => {
         const {item} = route.params
         const {id,title} = item
         setTitle(title)
-
+        setId(id)
     }, [])
 
     const getData = async () => {
@@ -56,23 +51,23 @@ const storeData = async (value) => {
     }else{
 
         const data = await getData();
-        
+        const newList = data.map((i)=>{
+            if(i.id == id){
+                i.title = title
+            }
+            return i
+        })
+
+        storeData(newList)
+
         // data.push(item)
         // storeData(data)
-        
-        setError("")
-        
+
         navigation.navigate("Home")
     }
    
 
 }
-
-
-
-
-
-
 
 
 
