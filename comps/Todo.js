@@ -9,22 +9,33 @@ import {Button} from 'native-base'
 import {CheckBox} from 'native-base'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Todo = ({cardColor}) => {
+const Todo = ({cardColor,deleteItem,checkHandler,navigation,item}) => {
+    const time = new Date()
+    const formattime = time.getDate()+"/"+(time.getMonth()+1)+"/"+time.getFullYear();
     return (
         <View style={[styles.container,{backgroundColor:cardColor}]} >
             <View>
-                <Text style={styles.title} >This is the task</Text>
-                <Text style={styles.subTitle} >This is the subtitle</Text>
+                <Text style={styles.title} >{item.title}</Text>
+                <Text style={styles.subTitle} >{formattime}</Text>
             </View>
             <View style = {styles.buttonContainer} >
             <CheckBox
-             checked
+            checked={item.isChecked}
+            onPress={()=>checkHandler(item.id)}
             size = {40}
             style={styles.checkbox} />
-                <Button style = {styles.actionButtons}  delayPressIn={150} >
+                <Button 
+                 style = {styles.actionButtons}  
+                 delayPressIn={150} 
+                 onPress={()=>{navigation.navigate('Edit',{item})}}
+                >
                     <Icon name="edit" size={29} color={"#3b3b3b"} />
                 </Button >
-                <Button style = {styles.actionButtons} delayPressIn={150}>
+                <Button
+                 style = {styles.actionButtons} 
+                 delayPressIn={150}
+                 onPress={()=>(deleteItem(item.id))}
+                >
                     <Icon name="trash" size={30} color={"#3b3b3b"} />
                 </Button>
             </View>

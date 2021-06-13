@@ -23,7 +23,7 @@ const App = () => {
    
     <NavigationContainer>
       <Stack.Navigator 
-      initialRouteName="New" 
+      initialRouteName="Home" 
       screenOptions = {{
         title:"Todo List",
         headerTitleAlign:"center",
